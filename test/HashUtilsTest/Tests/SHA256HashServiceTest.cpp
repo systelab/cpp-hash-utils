@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "HashUtils/SHA256Service.h"
+#include "HashUtils/SHA256HashService.h"
 
 
 using namespace testing;
@@ -7,14 +7,14 @@ using namespace testing;
 namespace systelab { namespace hash_utils { namespace unit_test {
 
 	namespace {
-		struct SHA256ServiceTestData
+		struct SHA256HashServiceTestData
 		{
 			std::string value;
 			std::string expectedHash;
 		};
 		
 		// Test data generated using webpage: https://emn178.github.io/online-tools/sha256.html
-		std::vector<SHA256ServiceTestData> testData = {
+		std::vector<SHA256HashServiceTestData> testData = {
 			{
 				"Patata",
 				"0cae58ab02970f792b8b75150604a4bfa70b7fc6c40026f684a67aaeedffe8d1"
@@ -36,12 +36,12 @@ namespace systelab { namespace hash_utils { namespace unit_test {
 		};
 	}
 
-	class SHA256ServiceTest : public testing::TestWithParam<SHA256ServiceTestData>
+	class SHA256HashServiceTest : public testing::TestWithParam<SHA256HashServiceTestData>
 	{
 	public:
 		void SetUp()
 		{
-			m_hashService = std::make_unique<SHA256Service>();
+			m_hashService = std::make_unique<SHA256HashService>();
 		}
 
 	protected:
@@ -49,14 +49,14 @@ namespace systelab { namespace hash_utils { namespace unit_test {
 	};
 
 
-	TEST_P(SHA256ServiceTest, testComputeHashReturnsExpectedValue)
+	TEST_P(SHA256HashServiceTest, testComputeHashReturnsExpectedValue)
 	{
 		ASSERT_EQ(GetParam().expectedHash, m_hashService->computeHash(GetParam().value));
 	}
 
 #pragma warning (push)
 #pragma warning (disable : 4996)
-	INSTANTIATE_TEST_CASE_P(Test, SHA256ServiceTest, testing::ValuesIn(testData));
+	INSTANTIATE_TEST_CASE_P(Test, SHA256HashServiceTest, testing::ValuesIn(testData));
 #pragma warning (pop)
 
 }}}
