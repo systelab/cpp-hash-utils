@@ -18,6 +18,11 @@ set(HASH_UTILS_TEST_UTILITIES_PACKAGE_TEST_PROJECT HashUtilsTestUtilitiesPackage
 add_executable(${HASH_UTILS_TEST_UTILITIES_PACKAGE_TEST_PROJECT} HashUtilsTestUtilitiesExample.cpp)
 target_link_libraries(${HASH_UTILS_TEST_UTILITIES_PACKAGE_TEST_PROJECT} HashUtilsTestUtilities::HashUtilsTestUtilities)
 
+# Ignored missing PDBs link warning on Visual Studio
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    set_target_properties(${HASH_UTILS_TEST_UTILITIES_PACKAGE_TEST_PROJECT} PROPERTIES LINK_FLAGS "/ignore:4099")
+endif()
+
 # Register test
 enable_testing()
 add_test(NAME HashUtilsTestUtilitiesPackageTest COMMAND ${HASH_UTILS_TEST_UTILITIES_PACKAGE_TEST_PROJECT})
