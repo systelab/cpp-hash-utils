@@ -98,6 +98,7 @@ Create an instance of the `systelab::hash::HashUtilsFactory` class to build the 
 
 ```cpp
 #include "HashUtils/HashUtilsFactory"
+#include "HashUtils/IHashService.h"
 
 systelab::hash::HashUtilsFactory hashUtilsFactory;
 ```
@@ -107,9 +108,7 @@ systelab::hash::HashUtilsFactory hashUtilsFactory;
 The SHA-256 hash of an string value can be computed as follows:
 
 ```cpp
-#include "HashUtils/IHashService.h"
-
-std::string hash = hashUtilsFactory.buildSHA256HashService()->computeHash("String value to compute the hash");
+std::string hash = hashUtilsFactory.buildSHA256HashService()->computeHash("Value to be hashed");
 ```
 
 ### MD5
@@ -117,8 +116,6 @@ std::string hash = hashUtilsFactory.buildSHA256HashService()->computeHash("Strin
 The MD5 hash of an string value can be computed in analogous manner:
 
 ```cpp
-#include "HashUtils/IHashService.h"
-
-std::string hash = hashUtilsFactory.buildMD5HashService()->computeHash("String value to compute the hash");
+std::string hash = hashUtilsFactory.buildMD5HashService()->computeHash("Value to be hashed");
 ```
 
