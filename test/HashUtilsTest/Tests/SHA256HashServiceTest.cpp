@@ -1,5 +1,6 @@
 #include "stdafx.h"
-#include "HashUtils/SHA256HashService.h"
+#include "HashUtils/HashUtilsFactory.h"
+#include "HashUtils/IHashService.h"
 
 
 using namespace testing;
@@ -41,7 +42,7 @@ namespace systelab { namespace hash { namespace unit_test {
 	public:
 		void SetUp()
 		{
-			m_hashService = std::make_unique<SHA256HashService>();
+			m_hashService = HashUtilsFactory().buildSHA256HashService();
 		}
 
 	protected:

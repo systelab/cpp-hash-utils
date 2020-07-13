@@ -1,5 +1,6 @@
 #include "stdafx.h"
-#include "HashUtils/MD5HashService.h"
+#include "HashUtils/HashUtilsFactory.h"
+#include "HashUtils/IHashService.h"
 
 
 using namespace testing;
@@ -41,7 +42,7 @@ namespace systelab { namespace hash { namespace unit_test {
 	public:
 		void SetUp()
 		{
-			m_hashService = std::make_unique<MD5HashService>();
+			m_hashService = HashUtilsFactory().buildMD5HashService();
 		}
 
 	protected:
