@@ -1,6 +1,6 @@
 #pragma once
 
-#include "JWTUtils/Services/IHashService.h"
+#include "HashUtils/IHashService.h"
 
 
 namespace systelab { namespace hash { namespace test_utility {
