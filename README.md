@@ -94,7 +94,7 @@ target_link_libraries(${MY_PROJECT} ${CONAN_LIBS})
 
 ## Usage
 
-Create an instance of the `systelab::hash::HashUtilsFactory` class to build the services that support the hash algorithms:
+Create an instance of the `systelab::hash::HashUtilsFactory` class to build the services that implement the supported the hash algorithms:
 
 ```cpp
 #include "HashUtils/HashUtilsFactory"
