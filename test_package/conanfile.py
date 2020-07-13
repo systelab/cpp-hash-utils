@@ -7,6 +7,7 @@ class HashUtilsTestConan(ConanFile):
     default_options = {"openssl":"1.1.1g", "gtest":"1.10.0"}
 
     def configure(self):
+        self.options["HashUtils"].openssl = self.options.openssl
         self.options["HashUtils"].gtest = self.options.gtest
 
     def build(self):
