@@ -43,10 +43,12 @@ class HashUtilsConan(ConanFile):
         self.copy("*.so*", dst="bin", src="lib")
 
     def package(self):
-        self.copy("EncryptionAdapter.h", dst="include/CaeserCypherEncryptionAdapter", src="src/CaeserCypherEncryptionAdapter")
-        self.copy("*CaeserCypherEncryptionAdapter.lib", dst="lib", keep_path=False)
-        self.copy("*CaeserCypherEncryptionAdapter.pdb", dst="lib", keep_path=False)
-        self.copy("*CaeserCypherEncryptionAdapter.a", dst="lib", keep_path=False)
+		self.copy("IHashService.h", dst="include/HashUtils", src="src/HashUtils")
+        self.copy("IHashUtilsFactory.h", dst="include/HashUtils", src="src/HashUtils")
+        self.copy("HashUtilsFactory.h", dst="include/HashUtils", src="src/HashUtils")
+        self.copy("*HashUtils.lib", dst="lib", keep_path=False)
+        self.copy("*HashUtils.pdb", dst="lib", keep_path=False)
+        self.copy("*HashUtils.a", dst="lib", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
