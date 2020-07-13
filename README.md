@@ -33,12 +33,27 @@ Build library with the following steps:
   5. Use `Visual Studio` (on Windows) or `make` (on Linux) to build the library
 
 #### Windows
+
+In order to build the application on Windows for the `Release` configuration, run the following commands ($VSINSTALLPATH is the path where Visual Studio has been installed):
+
 ``` bash
 > git clone https://github.com/systelab/cpp-hash-utils
 > md build && cd build
-> conan install .. -s arch=x86_64
-> cmake ..
-> devenv.exe HashUtils.sln
+> conan remote add systelab-bintray https://api.bintray.com/conan/systelab/conan
+> conan install .. -s build_type=Release -s compiler.toolset=v142 -s arch=x86_64
+> cmake .. -G "Visual Studio 16 2019" -A x64
+> "$VSINSTALLPATH/devenv.com" HashUtils.sln /build "Release" /PROJECT "HashUtils"
+```
+
+However, if you want to `Debug` the source code, you will need these commands:
+
+``` bash
+> git clone https://github.com/systelab/cpp-hash-utils
+> md build && cd build
+> conan remote add systelab-bintray https://api.bintray.com/conan/systelab/conan
+> conan install .. -s build_type=Debug -s compiler.toolset=v142 -s arch=x86_64
+> cmake .. -G "Visual Studio 16 2019" -A x64
+> "$VSINSTALLPATH/devenv.com" HashUtils.sln /build "Debug" /PROJECT "HashUtils"
 ```
 
 #### Linux
