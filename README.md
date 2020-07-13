@@ -7,12 +7,12 @@
 
 # C++ utilities for Hashes
 
-This repository offers a set of utilities to generate hashes using the most common algorithms. They are implemented based on [OpenSSL](https://www.openssl.org/) library, but offering a much simpler interface.
+This repository offers a set of utilities to generate hashes using the most popular algorithms. They are implemented based on [OpenSSL](https://www.openssl.org/) library, but offering a much simpler interface.
 
-## Supported features
+## Supported hash functions
 
-* SHA256
-* MD5
+* [SHA-256](https://en.wikipedia.org/wiki/SHA-2)
+* [MD5](https://en.wikipedia.org/wiki/MD5)
 
 ## Setup
 
@@ -94,4 +94,31 @@ target_link_libraries(${MY_PROJECT} ${CONAN_LIBS})
 
 ## Usage
 
-`TBD`
+Create an instance of the `systelab::hash::HashUtilsFactory` class to build the services that support the hash algorithms:
+
+```cpp
+#include "HashUtils/HashUtilsFactory"
+
+systelab::hash::HashUtilsFactory hashUtilsFactory;
+```
+
+### SHA-256
+
+The SHA-256 hash of an string value can be computed as follows:
+
+```cpp
+#include "HashUtils/IHashService.h"
+
+std::string hash = hashUtilsFactory.buildSHA256HashService()->computeHash("String value to compute the hash");
+```
+
+### MD5
+
+The MD5 hash of an string value can be computed in analogous manner:
+
+```cpp
+#include "HashUtils/IHashService.h"
+
+std::string hash = hashUtilsFactory.buildMD5HashService()->computeHash("String value to compute the hash");
+```
+
