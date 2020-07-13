@@ -5,7 +5,7 @@
 [![Download](https://api.bintray.com/packages/systelab/conan/HashUtils:systelab/images/download.svg)](https://bintray.com/systelab/conan/HashUtils:systelab/_latestVersion)
 
 
-# C++ utilities for Hashes
+# C++ Utilities for Hashes
 
 This repository offers a set of utilities to generate hashes using the most popular algorithms. They are implemented based on [OpenSSL](https://www.openssl.org/) library, but offering a much simpler interface.
 
