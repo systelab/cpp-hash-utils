@@ -43,7 +43,7 @@ class HashUtilsConan(ConanFile):
         self.copy("*.so*", dst="bin", src="lib")
 
     def package(self):
-		self.copy("IHashService.h", dst="include/HashUtils", src="src/HashUtils")
+        self.copy("IHashService.h", dst="include/HashUtils", src="src/HashUtils")
         self.copy("IHashUtilsFactory.h", dst="include/HashUtils", src="src/HashUtils")
         self.copy("HashUtilsFactory.h", dst="include/HashUtils", src="src/HashUtils")
         self.copy("*HashUtils.lib", dst="lib", keep_path=False)
