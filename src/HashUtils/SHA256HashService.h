@@ -5,11 +5,11 @@
 
 namespace systelab { namespace hash_utils {
 
-	class SHA256Service : public IHashService
+	class SHA256HashService : public IHashService
 	{
 	public:
-		SHA256Service();
-		virtual ~SHA256Service();
+		SHA256HashService();
+		virtual ~SHA256HashService();
 
 		std::string computeHash(const std::string& value) const override;
 	};

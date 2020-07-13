@@ -1,4 +1,4 @@
-#include "SHA256Service.h"
+#include "SHA256HashService.h"
 
 #include <iomanip>
 #include <sstream>
@@ -8,10 +8,10 @@
 
 namespace systelab { namespace hash_utils {
 
-	SHA256Service::SHA256Service() = default;
-	SHA256Service::~SHA256Service() = default;
+	SHA256HashService::SHA256HashService() = default;
+	SHA256HashService::~SHA256HashService() = default;
 
-	std::string SHA256Service::computeHash(const std::string& value) const
+	std::string SHA256HashService::computeHash(const std::string& value) const
 	{
 		unsigned char hash[SHA256_DIGEST_LENGTH];
 		SHA256_CTX sha256;
