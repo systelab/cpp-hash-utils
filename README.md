@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/systelab/cpp-hash-utils.svg?branch=master)](https://travis-ci.org/systelab/cpp-hash-utils)
-[![Build status](https://ci.appveyor.com/api/projects/status/qdrjivrs26gf46lo?svg=true)](https://ci.appveyor.com/project/systelab/cpp-hash-utils)
+[![Build status](https://ci.appveyor.com/api/projects/status/p9wc1exxkvx3yavt?svg=true)](https://ci.appveyor.com/project/systelab/cpp-hash-utils)
 [![codecov](https://codecov.io/gh/systelab/cpp-hash-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/systelab/cpp-hash-utils)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/492f2b284cd149018ec9dd54a45d53df)](https://www.codacy.com/app/systelab/cpp-hash-utils?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=systelab/cpp-hash-utils&amp;utm_campaign=Badge_Grade)
 [![Download](https://api.bintray.com/packages/systelab/conan/HashUtils:systelab/images/download.svg)](https://bintray.com/systelab/conan/HashUtils:systelab/_latestVersion)
