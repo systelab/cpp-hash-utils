@@ -6,7 +6,7 @@
 #include <openssl/md5.h>
 
 
-namespace systelab { namespace hash_utils {
+namespace systelab { namespace hash {
 
 	MD5HashService::MD5HashService() = default;
 	MD5HashService::~MD5HashService() = default;

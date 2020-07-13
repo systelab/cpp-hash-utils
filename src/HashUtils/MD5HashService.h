@@ -3,7 +3,7 @@
 #include "IHashService.h"
 
 
-namespace systelab { namespace hash_utils {
+namespace systelab { namespace hash {
 
 	class MD5HashService : public IHashService
 	{

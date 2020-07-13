@@ -3,7 +3,7 @@
 #include <string>
 
 
-namespace systelab { namespace hash_utils {
+namespace systelab { namespace hash {
 
 	class IHashService
 	{

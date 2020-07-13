@@ -6,7 +6,7 @@
 #include <openssl/sha.h>
 
 
-namespace systelab { namespace hash_utils {
+namespace systelab { namespace hash {
 
 	SHA256HashService::SHA256HashService() = default;
 	SHA256HashService::~SHA256HashService() = default;

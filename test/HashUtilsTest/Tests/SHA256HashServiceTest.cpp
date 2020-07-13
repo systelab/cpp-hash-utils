@@ -4,7 +4,7 @@
 
 using namespace testing;
 
-namespace systelab { namespace hash_utils { namespace unit_test {
+namespace systelab { namespace hash { namespace unit_test {
 
 	namespace {
 		struct SHA256HashServiceTestData
