@@ -17,7 +17,7 @@ namespace systelab { namespace hash_utils { namespace unit_test {
 		std::vector<SHA256ServiceTestData> testData = {
 			{
 				"Patata",
-				"da248eeaffa573da8c323c3eb56aaf32ec6ce244e401a24c55f30c907d0bbfb5"
+				"0cae58ab02970f792b8b75150604a4bfa70b7fc6c40026f684a67aaeedffe8d1"
 			},
 			{
 				"SuperSecretKey",
@@ -54,6 +54,9 @@ namespace systelab { namespace hash_utils { namespace unit_test {
 		ASSERT_EQ(GetParam().expectedHash, m_hashService->computeHash(GetParam().value));
 	}
 
+#pragma warning (push)
+#pragma warning (disable : 4996)
 	INSTANTIATE_TEST_CASE_P(Test, SHA256ServiceTest, testing::ValuesIn(testData));
-	
+#pragma warning (pop)
+
 }}}
