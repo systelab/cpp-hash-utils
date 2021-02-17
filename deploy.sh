@@ -38,10 +38,10 @@ function parseParameters
 
 parseParameters "${@}"
 
-echo -e "\nUploading HashUtils/$VERSION@systelab/stable to systelab-bintray...\n\n"
-conan upload "HashUtils/$VERSION@systelab/stable" --all -r systelab-bintray --force
+echo -e "\nUploading HashUtils/$VERSION@systelab/stable to systelab-public...\n\n"
+conan upload "HashUtils/$VERSION@systelab/stable" --all -r systelab-public --force
 checkErrors
 
-echo -e "\nUploading HashUtilsTestUtilities/$VERSION@systelab/stable to systelab-bintray...\n\n"
-conan upload "HashUtilsTestUtilities/$VERSION@systelab/stable" --all -r systelab-bintray --force
+echo -e "\nUploading HashUtilsTestUtilities/$VERSION@systelab/stable to systelab-public...\n\n"
+conan upload "HashUtilsTestUtilities/$VERSION@systelab/stable" --all -r systelab-public --force
 checkErrors
