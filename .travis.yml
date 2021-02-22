@@ -97,7 +97,6 @@ script:
   - cd bin
   - if [ $TRAVIS_OS_NAME == osx ]; then cp -f *.dylib /usr/local/lib; fi
   - ./HashUtilsTest --gtest_output=xml:HashUtilsTest.xml
-  - ls
   - cd ..
   - cd test
   - cd HashUtilsTest
