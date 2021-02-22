@@ -18,6 +18,9 @@ matrix:
       - COMPILER_LIBCXX=libstdc++11
       - GTEST_VERSION=1.8.1
       - OPENSSL_VERSION=1.0.2s
+    cache:
+      directories:
+        - $HOME/.conan/data
 
   - os: linux
     dist: xenial
@@ -37,6 +40,9 @@ matrix:
       - COMPILER_LIBCXX=libstdc++11
       - GTEST_VERSION=1.8.1
       - OPENSSL_VERSION=1.0.2s
+    cache:
+      directories:
+        - $HOME/.conan/data
 
   - os: linux
     dist: xenial
@@ -56,7 +62,10 @@ matrix:
       - COMPILER_LIBCXX=libstdc++11
       - GTEST_VERSION=1.8.1
       - OPENSSL_VERSION=1.0.2s
-
+    cache:
+      directories:
+        - $HOME/.conan/data
+      
   - os: osx
     osx_image: xcode12.2
     language: cpp
@@ -67,8 +76,10 @@ matrix:
       - COMPILER_LIBCXX=libc++
       - GTEST_VERSION=1.8.1
       - OPENSSL_VERSION=1.0.2s
+      - HOMEBREW_NO_AUTO_UPDATE=1
     cache:
       directories:
+        - $HOME/.conan/data
         - $HOME/Library/Caches/Homebrew
         - /usr/local/Homebrew
 
