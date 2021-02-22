@@ -141,6 +141,15 @@ script:
     fi
   - cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
   - make
+  - cd bin
+  - if [ $TRAVIS_OS_NAME == osx ]; then cp -f *.dylib /usr/local/lib; fi
+  - ./HashUtilsTest --gtest_output=xml:HashUtilsTest.xml
+  - cd ..
+  - cd test
+  - cd HashUtilsTest
+  - ctest
+  - cd ..
+  - cd ..
   - |
     if [ -n "$TRAVIS_TAG" ]; then
       conan export-pkg ../conanfile.py "HashUtilsTestUtilities/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION};
