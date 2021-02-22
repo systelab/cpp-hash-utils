@@ -112,7 +112,7 @@ function findTestProjectConfiguration
 	if [[ -z "$TEST_PROJECT_REPORT" ]]
 	then
 		echo "Test report file for $TEST_PROJECT_NAME not found, using default (build/bin/$TEST_PROJECT_NAME.xml)"
-		TEST_PROJECT_REPORT="build/bin/"$TEST_PROJECT_NAME".xml"
+		TEST_PROJECT_REPORT="build/bin/$TEST_PROJECT_NAME.xml"
 	else
 		echo "Test report file: $TEST_PROJECT_REPORT"
 	fi
@@ -250,7 +250,8 @@ function dispatchDocBuildsEvent
 		 "https://api.github.com/repos/$REPO_OWNER/$REPO_SLUG/dispatches" \
 		 -d "$BODY_CONTENT"
 	checkErrors
-	echo "Done.\n"
+	echo "Done."
+	echo ""
 }
 
 
