@@ -162,10 +162,9 @@ function uploadTestReportToGitHub
 	GITHUB_ASSET_UPLOAD_RESPONSE=$(curl --silent -H "Authorization: token $GITHUB_ACTION_DISPATCH_TOKEN" -H "Content-Type: $GITHUB_ASSET_CONTENT_TYPE" --data-binary @$TEST_PROJECT_REPORT $GITHUB_ASSET_UPLOAD_URL)
 	checkErrors
 	echo "Report uploaded successfully."
+	echo "Asset upload response: $GITHUB_ASSET_UPLOAD_RESPONSE"
 
-	GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE=(${GITHUB_ASSET_UPLOAD_RESPONSE//,/ })
-	echo "Asset upload response: $GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE"
-	TEST_PROJECT_ASSET_URL=$(echo $GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE | python3 -c "import sys, json; print(json.load(sys.stdin)['url'])")
+	TEST_PROJECT_ASSET_URL=$(echo $GITHUB_ASSET_UPLOAD_RESPONSE | python3 -c "import sys, json; print(json.load(sys.stdin)['url'])")
 	checkErrors
 	echo "Report asset URL is $TEST_PROJECT_ASSET_URL"
 	echo ""
