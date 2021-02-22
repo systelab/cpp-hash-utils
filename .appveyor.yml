@@ -65,10 +65,10 @@ build_script:
 test_script:
   - ps: cd bin
   - ps: cd $env:CONFIGURATION
-  - HashUtilsTest.exe --gtest_output=xml:HashUtilsTest.xml
+  - HashUtilsTest.exe --gtest_output=xml:../HashUtilsTest.xml
 
 after_test:
-  - ps: (new-object net.webclient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\HashUtilsTest.xml))
+  - ps: (new-object net.webclient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path ..\HashUtilsTest.xml))
 
 artifacts:
   - path: 'build\lib\%CONFIGURATION%\HashUtils.lib'
