@@ -19,9 +19,6 @@ matrix:
       - COMPILER_LIBCXX=libstdc++11
       - GTEST_VERSION=1.8.1
       - OPENSSL_VERSION=1.0.2s
-    cache:
-      directories:
-        - $HOME/.conan/data
 
   - os: linux
     dist: xenial
@@ -42,9 +39,6 @@ matrix:
       - COMPILER_LIBCXX=libstdc++11
       - GTEST_VERSION=1.8.1
       - OPENSSL_VERSION=1.0.2s
-    cache:
-      directories:
-        - $HOME/.conan/data
 
   - os: linux
     dist: xenial
@@ -65,9 +59,6 @@ matrix:
       - COMPILER_LIBCXX=libstdc++11
       - GTEST_VERSION=1.8.1
       - OPENSSL_VERSION=1.0.2s
-    cache:
-      directories:
-        - $HOME/.conan/data
       
   - os: osx
     osx_image: xcode12.2
@@ -83,7 +74,6 @@ matrix:
       - HOMEBREW_NO_AUTO_UPDATE=1
     cache:
       directories:
-        - $HOME/.conan/data
         - $HOME/Library/Caches/Homebrew
         - /usr/local/Homebrew
 
@@ -107,6 +97,7 @@ script:
   - cd bin
   - if [ $TRAVIS_OS_NAME == osx ]; then cp -f *.dylib /usr/local/lib; fi
   - ./HashUtilsTest --gtest_output=xml:HashUtilsTest.xml
+  - ls
   - cd ..
   - cd test
   - cd HashUtilsTest
@@ -115,9 +106,9 @@ script:
   - cd ..
   - |
     if [ -n "$TRAVIS_TAG" ]; then
-      conan export-pkg ../conanfile.py "HashUtils/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION} --force;
+      conan export-pkg ../conanfile.py "HashUtils/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION};
     else
-      conan export-pkg ../conanfile.py "HashUtils/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION} --force;
+      conan export-pkg ../conanfile.py "HashUtils/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION};
     fi
   - |
     if [ "$BUILD_TYPE" == "Release" ] || [ "$BUILD_TYPE" == "Debug" ]; then
@@ -143,9 +134,9 @@ script:
   - make
   - |
     if [ -n "$TRAVIS_TAG" ]; then
-      conan export-pkg ../conanfile.py "HashUtilsTestUtilities/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION} --force;
+      conan export-pkg ../conanfile.py "HashUtilsTestUtilities/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION};
     else
-      conan export-pkg ../conanfile.py "HashUtilsTestUtilities/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION} --force;
+      conan export-pkg ../conanfile.py "HashUtilsTestUtilities/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION};
     fi
   - |
     if [ "$BUILD_TYPE" == "Release" ] || [ "$BUILD_TYPE" == "Debug" ]; then
