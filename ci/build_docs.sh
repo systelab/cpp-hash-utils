@@ -135,7 +135,7 @@ function queryGitHubReleaseInternalId
 	GITHUB_RELEASE_URL="https://api.github.com/repos/$REPO_OWNER/$REPO_SLUG/releases/tags/$TAG_NAME"
 	echo "URL: $GITHUB_RELEASE_URL"
 
-	GITHUB_RELEASE_INTERNAL_ID=$(curl --silent "$GITHUB_RELEASE_URL" | grep '"id":' | head -1 | sed -r 's/\"id\":\s*([0-9]+),/\1/' | sed -e 's/^[[:space:]]*//')
+	GITHUB_RELEASE_INTERNAL_ID=$(curl --silent "$GITHUB_RELEASE_URL" | python3 -c "import sys, json; print(json.load(sys.stdin)['id'])")
 	checkErrors
 	echo "Release internal identifier is $GITHUB_RELEASE_INTERNAL_ID"
 	echo ""	
