@@ -111,8 +111,8 @@ function findTestProjectConfiguration
 	# Process test project report file found
 	if [[ -z "$TEST_PROJECT_REPORT" ]]
 	then
-		echo "Test report file for $TEST_PROJECT_NAME not found, using default (build/bin/$TEST_PROJECT_NAME.xml)"
-		TEST_PROJECT_REPORT="build/bin/$TEST_PROJECT_NAME.xml"
+		echo "Test report file for $TEST_PROJECT_NAME not found, using default (./build/bin/$TEST_PROJECT_NAME.xml)"
+		TEST_PROJECT_REPORT="./build/bin/$TEST_PROJECT_NAME.xml"
 	else
 		echo "Test report file: $TEST_PROJECT_REPORT"
 	fi
