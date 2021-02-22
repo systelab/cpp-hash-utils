@@ -83,3 +83,4 @@ deploy_script:
       } else {
         echo "Not uploading because this is not a tag build"
       }
+  - '%CYG_ROOT%/bin/bash -lc "cd $APPVEYOR_BUILD_FOLDER; ./ci/build_docs.sh -o \"systelab\" -s \"cpp-hash-utils\" -t \"$APPVEYOR_REPO_TAG_NAME\" -c AppVeyor -n \"$APPVEYOR_BUILD_WORKER_IMAGE %PLATFORM% %CONFIGURATION%\" -j \"$APPVEYOR_JOB_ID\" -p \"HashUtilsTest\"'
