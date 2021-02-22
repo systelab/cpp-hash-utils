@@ -162,13 +162,11 @@ script:
 deploy:
   - provider: script
     script: bash ./ci/deploy.sh -v "${TRAVIS_TAG:1}"
-    skip_cleanup: true
     on:
       tags: true
       condition: "$BUILD_TYPE != Coverage"
   - provider: script
     script: bash ./ci/build_docs.sh -o "systelab" -s "cpp-hash-utils" -t "${TRAVIS_TAG}" -c "Travis" -n "${COMPILER_NAME} ${BUILD_TYPE}" -j "${TRAVIS_JOB_ID}" -p "HashUtilsTest"
-    skip_cleanup: true
     on:
       tags: true
 
