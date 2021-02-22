@@ -13,6 +13,7 @@ configuration:
 environment:
   global:
     PYTHON: "C:\\Python36"
+    CYG_ROOT: C:\cygwin64
 
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
