@@ -162,7 +162,7 @@ function uploadTestReportToGitHub
 
 	GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE=(${GITHUB_ASSET_UPLOAD_RESPONSE//,/ })
 	echo "Asset upload response: $GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE"
-	TEST_PROJECT_ASSET_URL=$(echo $GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE | head -1 | sed -r 's/\{\"url\":\s*\"(.*)\"/\1/g')
+	TEST_PROJECT_ASSET_URL=$(echo $GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE | python3 -c "import sys, json; print(json.load(sys.stdin)['url'])")
 	checkErrors
 	echo "Report asset URL is $TEST_PROJECT_ASSET_URL"
 	echo ""
