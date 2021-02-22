@@ -115,9 +115,9 @@ script:
   - cd ..
   - |
     if [ -n "$TRAVIS_TAG" ]; then
-      conan export-pkg ../conanfile.py "HashUtils/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION};
+      conan export-pkg ../conanfile.py "HashUtils/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION} --force;
     else
-      conan export-pkg ../conanfile.py "HashUtils/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION};
+      conan export-pkg ../conanfile.py "HashUtils/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -o gtest=${GTEST_VERSION} -o openssl=${OPENSSL_VERSION} --force;
     fi
   - |
     if [ "$BUILD_TYPE" == "Release" ] || [ "$BUILD_TYPE" == "Debug" ]; then
