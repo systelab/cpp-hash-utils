@@ -135,7 +135,7 @@ function queryGitHubReleaseInternalId
 	GITHUB_RELEASE_URL="https://api.github.com/repos/$REPO_OWNER/$REPO_SLUG/releases/tags/$TAG_NAME"
 	echo "URL: $GITHUB_RELEASE_URL"
 
-	GITHUB_RELEASE_DATA_JSON=$(curl --silent "$GITHUB_RELEASE_URL")
+	GITHUB_RELEASE_DATA_JSON=$(curl --silent "$GITHUB_RELEASE_URL" -H "Authorization: token $GITHUB_ACTION_DISPATCH_TOKEN")
 	checkErrors
 	echo "Release data JSON: $GITHUB_RELEASE_DATA_JSON"
 	
