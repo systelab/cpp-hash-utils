@@ -1,5 +1,12 @@
 # Summary of changes
 
+## Changes for version 1.0.2 (22 Feb 2021)
+
+### Bug Fixes
+
+- Updated continuous integration to use GitHub Action to generate library documentation.
+
+
 ## Changes for version 1.0.1 (18 Feb 2021)
 
 ### Bug Fixes
