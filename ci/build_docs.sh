@@ -161,6 +161,7 @@ function uploadTestReportToGitHub
 	echo "Report uploaded successfully."
 
 	GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE=(${GITHUB_ASSET_UPLOAD_RESPONSE//,/ })
+	echo "Asset upload response: $GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE"
 	TEST_PROJECT_ASSET_URL=$(echo $GITHUB_ASSET_UPLOAD_RESPONSE_MULTILINE | head -1 | sed -r 's/\{\"url\":\s*\"(.*)\"/\1/g')
 	checkErrors
 	echo "Report asset URL is $TEST_PROJECT_ASSET_URL"
