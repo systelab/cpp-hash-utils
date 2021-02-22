@@ -13,6 +13,7 @@ matrix:
           - gcc-7
           - g++-7
     env:
+      - COMPILER_NAME=gcc-7
       - BUILD_TYPE=Release
       - CONAN_BUILD_TYPE=Release
       - COMPILER_LIBCXX=libstdc++11
@@ -35,6 +36,7 @@ matrix:
           - gcc-7
           - g++-7
     env:
+      - COMPILER_NAME=gcc-7
       - BUILD_TYPE=Debug
       - CONAN_BUILD_TYPE=Debug
       - COMPILER_LIBCXX=libstdc++11
@@ -57,6 +59,7 @@ matrix:
           - gcc-7
           - g++-7
     env:
+      - COMPILER_NAME=gcc-7
       - BUILD_TYPE=Coverage
       - CONAN_BUILD_TYPE=Debug
       - COMPILER_LIBCXX=libstdc++11
@@ -71,6 +74,7 @@ matrix:
     language: cpp
     compiler: clang
     env:
+      - COMPILER_NAME=clang-MacOS
       - BUILD_TYPE=Release
       - CONAN_BUILD_TYPE=Release
       - COMPILER_LIBCXX=libc++
