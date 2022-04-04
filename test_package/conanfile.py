@@ -16,7 +16,8 @@ class HashUtilsTestConan(ConanFile):
         cmake.build()
 
     def imports(self):
-        self.copy("*.dll", dst="bin", src="bin")
+        self.copy("*.dll", dst=("bin/%s" % self.settings.build_type), src="bin")
+        self.copy("*.dll", dst=("bin/%s" % self.settings.build_type), src="lib")
         self.copy("*.dylib*", dst="bin", src="lib")
         self.copy('*.so*', dst='bin', src='lib')
 
