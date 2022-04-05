@@ -63,17 +63,25 @@ pipeline
 							def props = readProperties file:"ci/pipelines/${configurations[i]}.properties"							
 							props.each { propKey, propValue -> println "${propKey}: ${propValue}" }
 
-							sh "mkdir build-${configurations[i]}"
-							dir("build-${configurations[i]}")
+							sh "mkdir build-HashUtils-${configurations[i]}"
+							dir("build-HashUtils-${configurations[i]}")
 							{
 								sh "conan install .. -s build_type=${props.conanBuildType} -s compiler.toolset=${props.conanCompilerToolset} -s arch=${props.conanArch} -o gtest=${props.conanGTestVersion} -o openssl=${props.conanOpenSSLVersion}"
 								sh "cmake .. -G '${props.cmakeVS}' -A ${props.cmakePlatform}"
 								sh "cmake --build . --config ${props.cmakeConfiguration}"
 								sh "conan export-pkg ../conanfile.py HashUtils/${version}@systelab/${channel} -s build_type=${props.conanBuildType} -s compiler.toolset=${props.conanCompilerToolset} -s arch=${props.conanArch} -o gtest=${props.conanGTestVersion} -o openssl=${props.conanOpenSSLVersion} --force"
 								sh "conan test ../test_package/conanfile.py HashUtils/${version}@systelab/${channel} -s build_type=${props.conanBuildType} -s compiler.toolset=${props.conanCompilerToolset} -s arch=${props.conanArch} -o gtest=${props.conanGTestVersion} -o openssl=${props.conanOpenSSLVersion}"
+								sh "bin/${props.conanBuildType}/HashUtilsTest.exe --gtest_output=xml:HashUtilsTest.xml"
+							}
+
+							sh "mkdir build-HashUtilsTestUtilities-${configurations[i]}"
+							dir("build-HashUtilsTestUtilities-${configurations[i]}")
+							{
+								sh "conan install ../test/HashUtilsTestUtilities -s build_type=${props.conanBuildType} -s compiler.toolset=${props.conanCompilerToolset} -s arch=${props.conanArch} -e VERSION=${version} -e CHANNEL=${channel} -o gtest=${props.conanGTestVersion} -o openssl=${props.conanOpenSSLVersion}"
+								sh "cmake ../test/HashUtilsTestUtilities -G '${props.cmakeVS}' -A ${props.cmakePlatform}"
+								sh "cmake --build . --config ${props.cmakeConfiguration}"
 								sh "conan export-pkg ../test/HashUtilsTestUtilities/conanfile.py HashUtilsTestUtilities/${version}@systelab/${channel} -s build_type=${props.conanBuildType} -s compiler.toolset=${props.conanCompilerToolset} -s arch=${props.conanArch} -o gtest=${props.conanGTestVersion} -o openssl=${props.conanOpenSSLVersion} --force"
 								sh "conan test ../test/HashUtilsTestUtilities/test_package/conanfile.py HashUtilsTestUtilities/${version}@systelab/${channel} -s build_type=${props.conanBuildType} -s compiler.toolset=${props.conanCompilerToolset} -s arch=${props.conanArch} -o gtest=${props.conanGTestVersion} -o openssl=${props.conanOpenSSLVersion}"
-								sh "bin/${props.conanBuildType}/HashUtilsTest.exe --gtest_output=xml:HashUtilsTest.xml"
 							}
 						}
 					}
