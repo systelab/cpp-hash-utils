@@ -63,7 +63,7 @@ pipeline
 								}
 								
 								def buildFolderTestUtilities = "build-HashUtilsTestUtilities-${config}-${arch}"
-								bat "conan install ./test/HashUtilsTestUtilities --install-folder ${buildFolderTestUtilities} --profile=${profile} -s build_type=${config} -s arch=${arch}"
+								bat "conan install ./test/HashUtilsTestUtilities ${version}@systelab/${testing} --install-folder ${buildFolderTestUtilities} --profile=${profile} -s build_type=${config} -s arch=${arch}"
 								bat "conan build ./test/HashUtilsTestUtilities --build-folder ${buildFolderTestUtilities}"
 								bat "conan export-pkg ./test/HashUtilsTestUtilities HashUtilsTestUtilities/${version}@systelab/${channel} --build-folder ${buildFolderTestUtilities} --force"
 							}
