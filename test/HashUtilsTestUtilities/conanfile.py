@@ -11,21 +11,10 @@ class HashUtilsTestUtilitiesConan(ConanFile):
     license = "MIT"
     generators = "cmake_find_package"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"openssl": ["1.0.2n", "1.0.2s", "1.1.1g"], "gtest": ["1.7.0", "1.8.1", "1.10.0"]}
-    default_options = {"openssl":"1.1.1g", "gtest":"1.10.0"}
-    exports_sources = "*"
-
-    def configure(self):
-        self.options["HashUtils"].gtest = self.options.gtest
-        self.options["HashUtils"].openssl = self.options.openssl
+    exports_sources = "*, !build*, !*.yml, !*.md, !ci, !.git*"
 
     def requirements(self):
-        if self.options.gtest == "1.7.0":
-            self.requires("gtest/1.7.0@systelab/stable")
-        elif self.options.gtest == "1.8.1":
-            self.requires("gtest/1.8.1")
-        else:
-            self.requires("gtest/1.10.0")
+        self.requires("gtest/1.10.0")
 
         if ("%s" % self.version) == "None":
             channel = os.environ['CHANNEL'] if "CHANNEL" in os.environ else "stable"
