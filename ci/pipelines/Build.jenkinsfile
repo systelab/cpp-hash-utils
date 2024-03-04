@@ -1,13 +1,12 @@
 def channel = 'testing'
 def version = '0.0.0'
-def profile = 'vs2019.conanprofile'
+def profile = 'vs2022.conanprofile'
 def archs = ['x86', 'x86_64']
 def configs = ['Debug', 'Release']
 
 library identifier: 'cpp-jenkins-pipelines@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
-   remote: 'https://github.com/systelab/cpp-jenkins-pipelines.git',
-   credentialsId: 'GitHubCredentials'])
+   remote: 'https://github.com/systelab/cpp-jenkins-pipelines.git'])
    
 pipeline
 {
@@ -18,7 +17,15 @@ pipeline
 
 	parameters
 	{
-		booleanParam( name: 'uploadTestingPkg',
+		string(	name: 'version',
+				description: 'Version to build (must match the name of the tag that will be checked out), leave blank for checkout of current branch',
+				defaultValue: '' )
+
+		booleanParam( name: 'stable',
+					  description: 'Show if generated library should be uploaded as stable or testing',
+					  defaultValue: false )
+		
+		booleanParam( name: 'uploadPackage',
 					  description: 'Whether or not to upload testing conan package',
 					  defaultValue: false )
 	}
@@ -37,7 +44,19 @@ pipeline
 			steps
 			{
 				deleteDir()
-				checkoutSourceCode()
+				script 
+				{
+					if (params.version == '')
+					{
+						checkoutSourceCode()
+					}
+					else
+					{
+						checkoutSourceCodeFromTag(version)
+						version = params.version
+					}
+					channel = params.stable ? 'stable' : 'testing'
+				}
 			}
 		}
 		
@@ -77,7 +96,7 @@ pipeline
 		{
 			when
 			{
-				expression { return params.uploadTestingPkg }
+				expression { params.uploadPackage }
 			}
 			steps
 			{
@@ -92,6 +111,10 @@ pipeline
 		always
 		{
 			junit allowEmptyResults: true, testResults: 'build*/test_reports/*.xml'
+            script
+			{
+				currentBuild.description = "${version}/${channel}"
+			}
 		}
 	}
 }

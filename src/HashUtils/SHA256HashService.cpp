@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include <openssl/sha.h>
+#include <openssl/evp.h>
 
 
 namespace systelab { namespace hash {
@@ -14,10 +15,7 @@ namespace systelab { namespace hash {
 	std::string SHA256HashService::computeHash(const std::string& value) const
 	{
 		unsigned char hash[SHA256_DIGEST_LENGTH];
-		SHA256_CTX sha256;
-		SHA256_Init(&sha256);
-		SHA256_Update(&sha256, value.c_str(), value.size());
-		SHA256_Final(hash, &sha256);
+		EVP_Digest(value.c_str(), value.size(), hash, nullptr, EVP_sha256(), nullptr);
 
 		std::stringstream ss;
 		for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
