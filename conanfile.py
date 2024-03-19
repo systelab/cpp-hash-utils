@@ -11,16 +11,15 @@ class HashUtilsConan(ConanFile):
 	license = "MIT"
 	generators = "cmake_find_package"
 	settings = "os", "compiler", "build_type", "arch"
-	options = {"openssl": ["1.0.2n", "1.0.2s", "1.1.1g"], "gtest": ["1.7.0", "1.8.1", "1.10.0"]}
-	default_options = {"openssl": "1.1.1g", "gtest": "1.10.0"}
 	exports_sources = "*, !build*, !*.yml, !*.md, !ci, !.git*"
 
 	def configure(self):
 		self.options["openssl"].shared = True
 
 	def requirements(self):
-		self.requires("openssl/1.1.1w#2d78cf15871a2cd0bc206c3d560cf741")
-		self.requires("gtest/1.10.0", private=True)
+		self.requires("zlib/1.2.13#13c96f538b52e1600c40b88994de240f", override=True)
+		self.requires("openssl/3.0.12#1670458f93ec138c3bb6afc65a1cd667")
+		self.requires("gtest/1.14.0#4372c5aed2b4018ed9f9da3e218d18b3", private=True)
 
 	def build(self):
 		cmake = CMake(self)

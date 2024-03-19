@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include <openssl/md5.h>
+#include <openssl/evp.h>
 
 
 namespace systelab { namespace hash {
@@ -14,7 +15,7 @@ namespace systelab { namespace hash {
 	std::string MD5HashService::computeHash(const std::string& value) const
 	{
 		unsigned char hash[MD5_DIGEST_LENGTH];
-		MD5((unsigned char*) value.c_str(), value.size(), hash);
+		EVP_Digest(value.c_str(), value.size(), hash, nullptr, EVP_md5(), nullptr);
 
 		std::stringstream ss;
 		for (int i = 0; i < MD5_DIGEST_LENGTH; i++)
