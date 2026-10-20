@@ -75,7 +75,7 @@ pipeline
 								bat "conan install . --output-folder ${buildFolder} --profile:all=${profile} --settings:all=build_type=${config} --settings:all=arch=${arch}"
 								bat "conan build . --output-folder ${buildFolder} --profile:all=${profile} --settings:all=build_type=${config} --settings:all=arch=${arch}"
 								bat "conan export-pkg . --name hash-utils --version ${version} --output-folder ${buildFolder} --profile:all=${profile} --settings:all=build_type=${config} --settings:all=arch=${arch}"
-								dir("${buildFolder}/bin/${config}")
+								dir("${buildFolder}/build/bin/${config}")
 								{
 									bat "HashUtilsTest.exe --gtest_output=xml:${env.WORKSPACE}/${buildFolder}/test_reports/HashUtilsTest.xml"
 								}
