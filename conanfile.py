@@ -40,6 +40,7 @@ class HashUtilsConan(ConanFile):
 		cmake = CMake(self)
 		cmake.configure()
 		cmake.build()
+		cmake.ctest(cli_args=["--output-on-failure"])
 
 	def package(self):
 		copy(self, "IHashService.h", dst=os.path.join(self.package_folder, "include", "HashUtils"), src=os.path.join(self.source_folder, "src", "HashUtils"))
