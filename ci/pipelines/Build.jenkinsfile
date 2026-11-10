@@ -1,4 +1,3 @@
-def channel = 'testing'
 def version = '0.0.0'
 def profile = 'vs2022.conanprofile'
 def archs = ['x86', 'x86_64']
@@ -7,7 +6,7 @@ def configs = ['Debug', 'Release']
 library identifier: 'cpp-jenkins-pipelines@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
    remote: 'https://github.com/systelab/cpp-jenkins-pipelines.git'])
-   
+
 pipeline
 {
 	agent
@@ -21,12 +20,8 @@ pipeline
 				description: 'Version to build (must match the name of the tag that will be checked out), leave as 0.0.0 for checkout of current branch',
 				defaultValue: '0.0.0' )
 
-		booleanParam( name: 'stable',
-					  description: 'Show if generated library should be uploaded as stable or testing',
-					  defaultValue: false )
-		
 		booleanParam( name: 'uploadPackage',
-					  description: 'Whether or not to upload testing conan package',
+					  description: 'Whether or not to upload the Conan package',
 					  defaultValue: false )
 	}
 
@@ -35,6 +30,11 @@ pipeline
 		skipDefaultCheckout(true)
 		disableConcurrentBuilds()
 		buildDiscarder(logRotator(numToKeepStr: '5'))
+	}
+
+	environment
+	{
+		PATH = "${env.USERPROFILE}\\.venvs\\conan2\\Scripts;${env.PATH}"
 	}
 
 	stages
@@ -55,7 +55,6 @@ pipeline
 						checkoutSourceCodeFromTag(version)
 						version = params.version
 					}
-					channel = params.stable ? 'stable' : 'testing'
 				}
 			}
 		}
@@ -73,18 +72,18 @@ pipeline
 							stage("Build ${config}|${arch}")
 							{
 								def buildFolder = "build-HashUtils-${config}-${arch}"
-								bat "conan install . --install-folder ${buildFolder} --profile=${profile} -s build_type=${config} -s arch=${arch}"
-								bat "conan build . --build-folder ${buildFolder}"
-								bat "conan export-pkg . HashUtils/${version}@systelab/${channel} --build-folder ${buildFolder} --force"
-								dir("${buildFolder}/bin/${config}")
+								bat "conan install . --output-folder ${buildFolder} --profile:all=${profile} --settings:all=build_type=${config} --settings:all=arch=${arch}"
+								bat "conan build . --output-folder ${buildFolder} --profile:all=${profile} --settings:all=build_type=${config} --settings:all=arch=${arch}"
+								bat "conan export-pkg . --name hash-utils --version ${version} --output-folder ${buildFolder} --profile:all=${profile} --settings:all=build_type=${config} --settings:all=arch=${arch}"
+								dir("${buildFolder}/build/bin/${config}")
 								{
 									bat "HashUtilsTest.exe --gtest_output=xml:${env.WORKSPACE}/${buildFolder}/test_reports/HashUtilsTest.xml"
 								}
 								
 								def buildFolderTestUtilities = "build-HashUtilsTestUtilities-${config}-${arch}"
-								bat "conan install ./test/HashUtilsTestUtilities ${version}@systelab/${channel} --install-folder ${buildFolderTestUtilities} --profile=${profile} -s build_type=${config} -s arch=${arch}"
-								bat "conan build ./test/HashUtilsTestUtilities --build-folder ${buildFolderTestUtilities}"
-								bat "conan export-pkg ./test/HashUtilsTestUtilities HashUtilsTestUtilities/${version}@systelab/${channel} --build-folder ${buildFolderTestUtilities} --force"
+								bat "conan install ./test/HashUtilsTestUtilities --version ${version} --output-folder ${buildFolderTestUtilities} --profile:all=${profile} --settings:all=build_type=${config} --settings:all=arch=${arch}"
+								bat "conan build ./test/HashUtilsTestUtilities --output-folder ${buildFolderTestUtilities} --profile:all=${profile} --settings:all=build_type=${config} --settings:all=arch=${arch}"
+								bat "conan export-pkg ./test/HashUtilsTestUtilities --name hash-utils-test-utilities --version ${version} --output-folder ${buildFolderTestUtilities} --profile:all=${profile} --settings:all=build_type=${config} --settings:all=arch=${arch}"
 							}
 						}
 					}
@@ -100,8 +99,8 @@ pipeline
 			}
 			steps
 			{
-				bat "conan upload HashUtils/${version}@systelab/${channel} --all -r systelab-conan-local --force"
-				bat "conan upload HashUtilsTestUtilities/${version}@systelab/${channel} --all -r systelab-conan-local --force"
+				bat "conan upload hash-utils/${version} --remote aid-conan-production-local --confirm --force"
+				bat "conan upload hash-utils-test-utilities/${version} --remote aid-conan-production-local --confirm --force"
 			}
 		}	
 	}
@@ -113,7 +112,7 @@ pipeline
 			junit allowEmptyResults: true, testResults: 'build*/test_reports/*.xml'
 			script
 			{
-				currentBuild.description = "${version}/${channel}"
+				currentBuild.description = "${version}"
 			}
 		}
 	}

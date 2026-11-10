@@ -11,7 +11,7 @@ set(HASH_UTILS HashUtils)
 file(GLOB_RECURSE HASH_UTILS_SRC "*.cpp")
 file(GLOB_RECURSE HASH_UTILS_HDR "*.h")
 add_library(${HASH_UTILS} STATIC ${HASH_UTILS_SRC} ${HASH_UTILS_HDR})
-target_link_libraries(${HASH_UTILS} OpenSSL::OpenSSL)
+target_link_libraries(${HASH_UTILS} OpenSSL::Crypto)
 
 #Configure source groups
 foreach(FILE ${HASH_UTILS_SRC} ${HASH_UTILS_HDR}) 

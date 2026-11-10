@@ -24,8 +24,8 @@ In order to build the application on Windows for the `Release` configuration, ru
 > git clone https://github.com/systelab/cpp-hash-utils
 > md build && cd build
 > conan remote add systelab-public https://systelab.jfrog.io/artifactory/api/conan/cpp-conan-production-local
-> conan install .. -s build_type=Release -s compiler.toolset=v142 -s arch=x86_64
-> cmake .. -G "Visual Studio 16 2019" -A x64
+> conan install .. --output-folder . --profile:all=../vs2022.conanprofile --settings:all=build_type=Release --settings:all=arch=x86_64
+> cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
 > "$VSINSTALLPATH/devenv.com" HashUtils.sln /build "Release" /PROJECT "HashUtils"
 ```
 
@@ -35,8 +35,8 @@ However, if you want to `Debug` the source code, you will need these commands:
 > git clone https://github.com/systelab/cpp-hash-utils
 > md build && cd build
 > conan remote add systelab-public https://systelab.jfrog.io/artifactory/api/conan/cpp-conan-production-local
-> conan install .. -s build_type=Debug -s compiler.toolset=v142 -s arch=x86_64
-> cmake .. -G "Visual Studio 16 2019" -A x64
+> conan install .. --output-folder . --profile:all=../vs2022.conanprofile --settings:all=build_type=Debug --settings:all=arch=x86_64
+> cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
 > "$VSINSTALLPATH/devenv.com" HashUtils.sln /build "Debug" /PROJECT "HashUtils"
 ```
 
@@ -46,7 +46,7 @@ However, if you want to `Debug` the source code, you will need these commands:
 > git clone https://github.com/systelab/cpp-hash-utils
 > mkdir build && cd build
 > conan remote add systelab-public https://systelab.jfrog.io/artifactory/api/conan/cpp-conan-production-local
-> conan install ..
-> cmake .. -DCMAKE_BUILD_TYPE=[Debug | Coverage | Release]
+> conan install .. --output-folder .
+> cmake .. -DCMAKE_BUILD_TYPE=[Debug | Coverage | Release] -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
 > make
 ```
